@@ -5,7 +5,9 @@ author: Jeanine
 tags: Paper; Multi-view clustering;
 ---
 文章来源：IJCAI-16
+
 作者：Handong Zhao, Hongfu Liu and Yun Fu
+
 机构：Northeastern University, Boston, USA
 
 ## 一句话描述
@@ -14,11 +16,9 @@ tags: Paper; Multi-view clustering;
 
 ## Introduction
 
-IMG：Incomplete multi-modality Grouping不完整多模态聚类
-
-- 方法：
-  - 删除缺失信息。*改变了样本数，违背了原始问题的目标。*（这怎么了？）
-  - 填充缺失信息
+- 缺失多视图方法分类：
+  - 删除缺失信息。改变了样本数，违背了原始问题的目标。
+  - 填充缺失信息。填充的样本将为视为一类。
 - 问题阐述：
   - Partial Multi-View Clustering使用矩阵分解和$L_1$范数得到一致潜在子空间。
     ![ ](https://img-blog.csdnimg.cn/20200618101714709.png)
