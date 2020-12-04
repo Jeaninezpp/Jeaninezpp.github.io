@@ -1,15 +1,23 @@
-name: 
-author: 
-url: 
+name: Jeanine
+author: Jeanine
+url: "https://jeaninezpp.github.io"
 baseurl: 
 resume_site: 
-description: 
-github_username: 
+description: Salt is for self-discipline, sweet for others.
+github_username: Jeaninezpp
 github: 
-plugins: [jekyll-paginate]
+# Gems
+plugins:
+  - jekyll-feed
+  - jekyll-paginate
+  - jekyll-seo-tag
+  - jemoji #Uncomment this to allow emoji in your post
+
+# Permalinks
 permalink: /:year-:month-:day-:title
 paginate: 12
 paginate_path: "/page/:num/"
+
 exclude: ['README.md', 'Gemfile.lock', 'Gemfile', 'Rakefile']
 highlighter: rouge
 markdown: kramdown
@@ -20,3 +28,9 @@ comments :
     repo : 
     owner : 
     admin : 
+    
+# Google Analytics
+google_analytics: G-T18M8BF037
+
+# Disqus (Set to your disqus id)
+disqus:         jekyll-tale
