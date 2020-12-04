@@ -5,7 +5,7 @@ baseurl:
 resume_site: 
 description: Salt is for self-discipline, sweet for others.
 github_username: Jeaninezpp
-github: 
+github: https://github.com/Jeaninezpp
 # Gems
 plugins:
   - jekyll-feed
