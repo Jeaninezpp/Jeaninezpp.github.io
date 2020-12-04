@@ -3,7 +3,7 @@ layout: post
 title: Incomplete Multi-Modal Visual Data Grouping
 date: 2020-12-02 21:00:00
 category: paper
-tags: Paper, Multi-view, clustering
+tags: Paper
 thumbnail: /style/image/paper.png
 icon: book
 ---
