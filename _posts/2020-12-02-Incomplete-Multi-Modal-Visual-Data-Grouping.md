@@ -1,17 +1,17 @@
 ---
 layout: post
-title: Incomplete Multi-Modal Visual Data Grouping
-date: 2020-12-02 21:00:00
+title: Incomplete Multi-Modal Visual Data Grouping 论文
+date: 2020-12-02 21:00:00 +0800
 category: paper
-tags: Paper
+tags: ["paper","multi-view","incomplete"]
 thumbnail: /style/image/paper.png
-icon: book
+icon: paper
 ---
 
 * content
 {:toc}
 
-## 文章信息
+## Info
 
 文章来源：IJCAI-16
 
