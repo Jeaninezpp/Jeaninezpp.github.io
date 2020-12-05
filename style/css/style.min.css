@@ -480,7 +480,7 @@ textarea:-ms-input-placeholder {
 	background-position: 0 -40px!important
 }
 
-.bg-ico-note {
+.bg-ico-paper {
 	background-position: 0 -80px!important
 }
 
@@ -496,7 +496,7 @@ textarea:-ms-input-placeholder {
 	background-position: 0 -200px!important
 }
 
-.bg-ico-web {
+.bg-ico-tech {
 	background-position: 0 -240px!important
 }
 
@@ -1409,10 +1409,6 @@ textarea:-ms-input-placeholder {
 
 
 
-
-
-
-
 .tags-page {
 	padding: 120px 20px 40px
 }
@@ -1471,14 +1467,14 @@ textarea:-ms-input-placeholder {
 .tags-header-title {
     color: #353535;
     font-family: 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;
-    font-size: 4rem;
-    margin: 1rem 0;
+    font-size: 3rem;
+    margin: 0;
     text-align: center;
 }
 .tags-header-line {
     border-top: 0.4rem solid #353535;
     display: block;
-    margin: 0 auto 3rem;
+    margin: 0 auto 2rem;
     width: 4rem;
 }
 .tags-clouds {

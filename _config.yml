@@ -30,7 +30,7 @@ comments :
     admin : 
     
 # Google Analytics
-google_analytics: G-T18M8BF037
+# google_analytics: G-HC9BLYFY4T
 
 # Disqus (Set to your disqus id)
 disqus:         jekyll-tale
