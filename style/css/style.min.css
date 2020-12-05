@@ -1154,8 +1154,8 @@ textarea:-ms-input-placeholder {
 }
 
 .post-content a {
-	color: #313131;
-	border-bottom: 1px solid #ccc;
+	color: #4a9ae1;
+	/* border-bottom: 1px solid #ccc; */
 }
 
 .post-content p a:hover {
