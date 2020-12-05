@@ -4,7 +4,7 @@ title: Incomplete Multi-view Spectral Clustering with Adaptive Graph Learning шо
 date: 2020-12-05 15:05:00 +0800
 category: paper
 tags: ["paper","multi-view","incomplete","graph"]
-thumbnail: /style/image/paper.png
+thumbnail: /style/image/paper.jpg
 icon: paper
 ---
 

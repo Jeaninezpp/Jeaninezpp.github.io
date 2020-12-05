@@ -4,7 +4,7 @@ title: Incomplete Multi-Modal Visual Data Grouping 论文
 date: 2020-12-02 21:00:00 +0800
 category: paper
 tags: ["paper","multi-view","incomplete"]
-thumbnail: /style/image/paper.png
+thumbnail: /style/image/paper.jpg
 icon: paper
 ---
 
