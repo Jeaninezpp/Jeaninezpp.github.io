@@ -21,7 +21,7 @@ icon: paper
 - 因此这篇文章提出了低秩多模态融合的方法，利用low-rank weight tensors来进行有效的多模态融合。框架如下：
 ![20201216101757](https://jeanine-1304440691.cos.ap-chengdu.myqcloud.com/20201216101757.png)
 
-## **contributions**:
+- **contributions**
   - 提出低秩多模态融合算法，与模态数呈线性关系。 
   - 与SOTA性能相当。
   - 与之前的tensor的方法比，本文提出的方法参数少，效率高。
@@ -39,32 +39,34 @@ icon: paper
   - intermediate: 
     - both intra- and inter- modal.
     - Zadeh et al. (2017) 提出 **Tensor Fusion Network**, 从三个模态计算单个模态表示之间的外积来计算一个张量表示。
-但是，这种方法要对多个模态的表示进行外积操作，导致tensor representation维度很高，
-- 单个模态下low-rank tensor approximation 应用广泛，但尚未有使用low-rank tensor技术来进行多模态融合的。
+但是，这种方法要对多个模态的表示进行外积操作，导致 tensor representation 维度很高，
+- 单个模态下 low-rank tensor approximation 应用广泛，但尚未有使用 low-rank tensor 技术来进行多模态融合的。
 
 # Method
 文章提出一种模型，将权重分解为低阶因子，这样可以减少模型中参数的数量。这种分解可以通过利用低阶权重张量和输入张量的并行分解来有效地进行基于张量的融合。
 
-## 使用张量表示的多模态融合 Multimodal Fusion using Tensor Representation
+## 使用张量表示的多模态融合
 这篇论文将多模态融合表述为一个多线性函数 $f ∶ V_1 × V_2 × … × V_M → H$。
-其中$\{z_m\}_{m=1}^M$是M个单个模态的编码信息，而多模态融合的目标是将单模态的表示整合为一个紧凑的多模态表示来进行'下游'的工作。
+其中$\{z_m\}_{m=1}^M$是M个单个模态的编码信息，而多模态融合的目标是将单模态的表示整合为一个紧凑的多模态表示来进行 下游 的工作。
 
 ### tensor fusion
 张量表示是一种成功的多模态融合方法，它首先将多输入转换为高维张量，然后将其映射回一个低维输出向量空间。通过对输入模态取外积可以得到张量表示。
 
 为了能够用`一个张量`来模拟任意模态子集之间的相互作用。 Zadeh et al. (2017)提出在进行外积之前，给每个表示$z$后面加一个`1`。所以输入的张量$\mathcal{Z}$通过单个模态的表示计算得到:
-$$
+$
 \mathcal{Z}=\bigotimes_{m=1}^{M} z_{m}, z_{m} \in \mathbb{R}^{d_{m}}
-$$
+$，
 $z_m$是附加1的输入表示。
+
 输入张量$\mathcal{Z} \in \mathbb{R}^{d_1,d_2,...,d_m}$通过一个线性层$g(\cdot)$产生一个向量表示：
-$$
+$
 h = g(\mathcal{Z};\mathcal{W},b) = \mathcal{W} ⋅ \mathcal{Z} + b;
 h, b \in \mathbb{R}^{d_y} 
-$$
+$
 其中$\mathcal{W}$是权重，$b$是偏移量。
 
-由于$\mathcal{W}$是$M$阶张量，因此$\mathcal{W}$是$M+1$阶的张量，维度为$d_1×d_2×…×d_M×d_h$，额外的第$M+1$层为输出表示的大小$d_h$。在进行张量点积的过程中，我们可以把$\mathcal{W}$看作是$d_h$个$M$阶张量，即可以被划分为$\widetilde{\mathcal{W}}_{k} \in \mathbb{R}^{d_{1} \times \ldots \times d_{M}}, k=1, \ldots, d_{h}$，每一个$\widetilde{\mathcal{W}}_{k}$都在输出的向量$h$中贡献一个维度，即$h_k=\widetilde{\mathcal{W}}_{k} \cdot \mathcal{Z}$。
+由于$\mathcal{W}$是$M$阶张量，因此$\mathcal{W}$是$M+1$阶的张量，维度为$d_1×d_2×…×d_M×d_h$，额外的第$M+1$层为输出表示的大小$d_h$。在进行张量点积的过程中，我们可以把$\mathcal{W}$看作是$d_h$个$M$阶张量，即可以被划分为
+$\overline{\mathcal{W}}_{k} \in \mathbb{R}^{d_{1} \times \ldots \times d_{M}}, k=1, \ldots, d_{h}$，每一个$\overline{\mathcal{W}}_{k}$都在输出的向量$h$中贡献一个维度，即$h_k=\overline{\mathcal{W}}_{k} \cdot \mathcal{Z}$。
 下图为用两个模态的例子来解释**张量融合**：
 ![20201217145441](https://jeanine-1304440691.cos.ap-chengdu.myqcloud.com/20201217145441.png)
 
@@ -74,40 +76,41 @@ $$
 - 不仅引入了大量的计算，而且使模型面临着过度拟合的风险。
 
 
-## 利用模态特定因子进行低秩多模态融合 Low-rank Multimodal Fusion with Modality-Specific Factors
-为了解决tensor-based fusion方法的问题，文章提出了一种低秩多模态融合的方法(Low-rank Multimodal Fusion)(LMF)的方法，将$\mathcal{W}$分解为一组modality-specific low-rank factors，且利用$\mathcal{Z}$也可以分解为$\{z_m\}_{m=1}^M$。通过这种并行分解的方式，文章可以不显性获得高维的张量而直接计算到$h$。
+## 利用模态特定因子进行低秩多模态融合
+为了解决tensor-based fusion方法的问题，文章提出了一种低秩多模态融合的方法(Low-rank Multimodal Fusion)(LMF)的方法，将$\mathcal{W}$分解为一组modality-specific low-rank factors，且利用$\mathcal{Z}$也可以分解为${z_m}_{m=1}^M$。通过这种并行分解的方式，文章可以不显性获得高维的张量而直接计算到$h$。
 
 ### low-rank weighted decomposition
-把$\mathcal{W}$看作是$d_h$个$M$阶张量，每个$M$阶张量可以表示为$\widetilde{\mathcal{W}}_{k} \in \mathbb{R}^{d_{1} \times \ldots \times d_{M}}, k=1, \ldots, d_{h}$，存在一个精确分解成向量的模式：
-$$
-\widetilde{\mathcal{W}}_{k}=\sum_{i=1}^{R} \bigotimes_{m=1}^{M} w_{m, k}^{(i)}, ~~~  w_{m, k}^{(i)} \in \mathbb{R}_{m}^{d}
-$$
+把$\mathcal{W}$看作是$d_h$个$M$阶张量，每个$M$阶张量可以表示为$\overline{\mathcal{W}}_{k} \in \mathbb{R}^{d_{1} \times \ldots \times d_{M}}, k=1, \ldots, d_{h}$，存在一个精确分解成向量的模式：
+$
+\overline{\mathcal{W}}_{k}=\sum_{i=1}^{R} \bigotimes_{m=1}^{M} w_{m, k}^{(i)}, ~~~  w_{m, k}^{(i)} \in \mathbb{R}_{m}^{d}
+$
 最小的使得分解有效的$R$称为张量的rank。
 向量的集合$\left\{\left\{w_{m, k}^{(i)}\right\}_{m=1}^{M}\right\}_{i=1}^{R}$称为原始张量的秩$R$分解因子。
-文章固定$R$为$r$，然后用$r$分解因子$\left\{\left\{w_{m, k}^{(i)}\right\}_{m=1}^{M}\right\}_{i=1}^{r}$来重建低秩版本的$\widetilde{\mathcal{W}}_{k}$。
+
+文章固定$R$为$r$，然后用$r$分解因子$\left\{\left\{w_{m, k}^{(i)}\right\}_{m=1}^{M}\right\}_{i=1}^{r}$来重建低秩版本的$\overline{\mathcal{W}}_{k}$。
 这些向量可以重新组合为$M$个modality-specific low-rank的因子。令$\mathbf{w}_{m}^{(i)}=\left[w_{m, 1}^{(i)}, w_{m, 2}^{(i)}, \ldots, w_{m, d_{h}}^{(i)}\right]$，则模态$m$对应的低秩因子为$\left\{\mathbf{w}_{m}^{(i)}\right\}_{i=1}^{r}$。
 那么低秩的权重张量可以用下式重建得到：
-$$
+$
 \mathcal{W}=\sum_{i=1}^{r} \bigotimes_{m=1}^{M} \mathbf{w}_{m}^{(i)}
-$$
+$
 
 基于$\mathcal{W}$的分解，再根据$\mathcal{Z}=\bigotimes_{m=1}^{M} z_{m}$，我们可以把原来计算$h$的式子推算如下：
-$$
+$
 \begin{aligned}
 h &=\left(\sum_{i=1}^{r} \bigotimes_{m=1}^{M} \mathbf{w}_{m}^{(i)}\right) \cdot \mathcal{Z} =\sum_{i=1}^{r}\left(\bigotimes_{m=1}^{M} \mathbf{w}_{m}^{(i)} \cdot \mathcal{Z}\right) \\
 &=\sum_{i=1}^{r}\left(\bigotimes_{m=1}^{M} \mathbf{w}_{m}^{(i)} \cdot \bigotimes_{m=1}^{M} z_{m}\right) \\
 &=\bigwedge_{m=1}^{M}\left[\sum_{i=1}^{r} \mathbf{w}_{m}^{(i)} \cdot z_{m}\right]
 \end{aligned}
-$$
+$
 其中$\bigwedge_{m=1}^{M}$表示为一系列张量的元素积，即$\bigwedge_{t=1}^{3} x_{t}=x_{1} \circ x_{2} \circ x_{3}$。
 
 > 举一个两模态的例子：
-$$
+$
 \begin{aligned}
 h &=\left(\sum_{i=1}^{r} \mathbf{w}_{a}^{(i)} \otimes \mathbf{w}_{v}^{(i)}\right) \cdot \mathcal{Z} \\
 &=\left(\sum_{i=1}^{r} \mathbf{w}_{a}^{(i)} \cdot z_{a}\right) \circ\left(\sum_{i=1}^{r} \mathbf{w}_{v}^{(i)} \cdot z_{v}\right)
 \end{aligned}
-$$
+$
 > 三个模态的流程框架
 ![20201217215633](https://jeanine-1304440691.cos.ap-chengdu.myqcloud.com/20201217215633.png)
 
